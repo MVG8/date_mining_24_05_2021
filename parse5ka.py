@@ -22,7 +22,7 @@ class Parse5ka:
 
 
     def run(self):
-        for product in self.parse(self.start_url):
+        for product in self._parse(self.start_url): # перед parse поставил нижне подчеркивание
             file_name = f"{product['id']}.json"
             file_path = self.save_dir.joinpath(file_name)
             self._save(product, file_path)
@@ -38,8 +38,9 @@ class Parse5ka:
 
 
     def _save(self, data: dict, file_path: Path):
-        file_path.write_text(json.dumps(data)) #  ensure_ascii=False
+        file_path.write_text(json.dumps(data, ensure_ascii=False), 'utf8') #  ensure_ascii=False
 
+#class CategoriesParser(Parse5ka):
 
 def get_dir_path(dir_name: str) -> Path:
         dir_path = Path(__file__).parent.joinpath(dir_name)
